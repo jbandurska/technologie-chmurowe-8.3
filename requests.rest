@@ -1,0 +1,24 @@
+GET http://localhost:80/messages
+
+###
+
+POST http://localhost:80/messages
+Content-Type: application/json
+
+{
+    "message": "A very creative message."
+}
+
+###
+
+GET http://localhost:80/users
+
+###
+
+POST http://localhost:80/users
+Content-Type: application/json
+
+{
+    "name": "some_name",
+    "email": "some_name@email.com"
+}

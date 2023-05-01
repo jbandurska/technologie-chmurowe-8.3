@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  nginx:
+      image: nginx
+      ports:
+        - "80:80"
+      depends_on:
+        - app
+      volumes:
+        - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+      - postgres
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: myapp
+  redis:
+    image: redis:latest
+    restart: always
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: myapp
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
