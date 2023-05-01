@@ -22,3 +22,13 @@ Content-Type: application/json
     "name": "some_name",
     "email": "some_name@email.com"
 }
+
+###
+
+POST http://localhost:80/users
+Content-Type: application/json
+
+{
+    "name": "some_other_name",
+    "email": "some_other_name@email.com"
+}
